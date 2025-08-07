@@ -1,0 +1,23 @@
+{
+  "name": "yajsc-pw-automation",
+  "version": "1.0.0",
+  "description": "YAJSC - Playwright automation practice",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mariena-cher/yajsc-pw-automation.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mariena-cher/yajsc-pw-automation/issues"
+  },
+  "homepage": "https://github.com/mariena-cher/yajsc-pw-automation#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.54.2",
+    "@types/node": "^24.2.0"
+  }
+}

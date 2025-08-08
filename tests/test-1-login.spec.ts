@@ -14,6 +14,6 @@ test('Verify login with valid credentials', async ({ page }) => {
 
   await expect(page).toHaveURL('/account');
 
-  await expect(page.locator('[data-test="page-title"]')).toBeVisible();
-  await expect(page.locator('[data-test="nav-menu"]')).toBeVisible();
+  await expect(page.getByTestId('page-title')).toBeVisible();
+  await expect(page.getByTestId('nav-menu')).toBeVisible();
 });

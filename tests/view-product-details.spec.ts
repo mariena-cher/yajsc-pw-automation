@@ -9,9 +9,8 @@ test('Verify user can view product details', async ({ page }) => {
 
   const productPage = new ProductPage(page);
   await productPage.expectLoaded();
-  
-  await expect(page.getByTestId('product-name')).toBeVisible();
-  await expect(page.getByTestId('unit-price')).toBeVisible();
-  await expect(page.getByTestId('add-to-cart')).toBeVisible();
-  await expect(page.getByTestId('add-to-favorites')).toBeVisible();
+  await expect(productPage.productName).toBeVisible();
+  await expect(productPage.unitPrice).toBeVisible();
+  await expect(productPage.addToCart).toBeVisible();
+  await expect(productPage.addToFavorites).toBeVisible();
 });

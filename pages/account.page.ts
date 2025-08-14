@@ -1,13 +1,19 @@
 import { Page, expect } from "@playwright/test";
+import { Locator } from "@playwright/test";
+import { HeaderComponent } from "./component/header.component";
 
 export class AccountPage {
     page: Page;
+    pageTitle: Locator;
+    header: HeaderComponent;
 
   constructor(page: Page) {
     this.page = page;
+    this.pageTitle = page.getByTestId('page-title');
+    this.header = new HeaderComponent(this.page);
   }
 
   async expectLoaded(): Promise<void> {
-    await expect(this.page).toHaveURL('/account');
+    await expect(this.page).toHaveURL(/\/account/);
   }
 }

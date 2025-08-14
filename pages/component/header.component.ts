@@ -1,6 +1,6 @@
 import { Page, Locator } from '@playwright/test';
 
-export class HeaderFragment {
+export class HeaderComponent {
     page: Page;
     logo: Locator;
     navHome: Locator;

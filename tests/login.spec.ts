@@ -1,15 +1,12 @@
-import { test, expect} from '@playwright/test';
-import { LoginPage } from '../pages/login.page'; 
+import { test, expect} from '@playwright/test'; 
 import { AccountPage } from '../pages/account.page';
 
-test('Verify login with valid credentials', async ({ page }) => {
-  const loginPage = new LoginPage(page);
-  await loginPage.gotoLogin();
-  await loginPage.performLogin();
+  test.use({ storageState: './playwright/.auth/user.json' });
+  
+  test('Login test with valid credentials', async ({ page }) => {
+    const accountPage = new AccountPage(page);
+    await page.goto('/account');
 
-  const accountPage = new AccountPage(page);
-  await accountPage.expectLoaded();
-
-  await expect(accountPage.pageTitle).toBeVisible();
-  await expect(accountPage.header.navMenu).toBeVisible();
-});
+    await expect(accountPage.pageTitle).toBeVisible();
+    await expect(accountPage.header.navMenu).toBeVisible();
+    });

@@ -14,7 +14,7 @@ export class HomePage {
     this.sort = page.getByTestId('sort');
     this.productNames = page.locator('[data-testid^="product-"] [data-testid="product-name"]');
     this.productPrice = page.getByTestId('product-price');
-    this.category = page.getByTestId('category-01K2Q0FVX1AZ71P7210AJGKG06');
+    this.category = page.locator('[data-testid^="category-"]');
   }
 
   async goto(): Promise<void> {
@@ -35,6 +35,6 @@ export class HomePage {
 }
 
   async getAllProductNames(): Promise<string[]> {
-    return this.page.locator('[data-testid^="product-"] [data-testid="product-name"]').allTextContents();
+    return this.productNames.allTextContents()
   }
 }

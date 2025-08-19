@@ -26,32 +26,32 @@ test.describe('Product sorting by name', () => {
     });
   });
 
-test.describe('Product sorting by price', () => {
-  const priceSortOptions = [
-    { label: SortLabel.AscendingByPrice, order: SortOrder.Ascending },
-    { label: SortLabel.DescendingByPrice, order: SortOrder.Descending }
-  ];
+  test.describe('Product sorting by price', () => {
+    const priceSortOptions = [
+      { label: SortLabel.AscendingByPrice, order: SortOrder.Ascending },
+      { label: SortLabel.DescendingByPrice, order: SortOrder.Descending }
+    ];
 
-  priceSortOptions.forEach(({ label, order }) => {
-    test(`Verify user can perform sorting by price: ${label}`, async ({ page }) => {
-      const homePage = new HomePage(page);
-      await homePage.goto();
+    priceSortOptions.forEach(({ label, order }) => {
+      test(`Verify user can perform sorting by price: ${label}`, async ({ page }) => {
+        const homePage = new HomePage(page);
+        await homePage.goto();
 
-      await homePage.sort.selectOption({ label });
+        await homePage.sort.selectOption({ label });
 
-      const productPrices = await homePage.getAllProductPrices();
-      const sortedPrices = [...productPrices].sort((a, b) =>
-        order === SortOrder.Ascending ? a - b : b - a
-      );
+        const productPrices = await homePage.getAllProductPrices();
+        const sortedPrices = [...productPrices].sort((a, b) =>
+          order === SortOrder.Ascending ? a - b : b - a
+        );
 
-      expect(productPrices).toEqual(sortedPrices);
+        expect(productPrices).toEqual(sortedPrices);
+      });
     });
   });
-});
 
   test('Verify user can filter products by category', async ({ page }) => {
-  const homePage = new HomePage(page);
-  await homePage.goto();
+    const homePage = new HomePage(page);
+    await homePage.goto();
 
     await homePage.selectCategoryCheckbox(PowerTools.Sander);
 
@@ -62,5 +62,3 @@ test.describe('Product sorting by price', () => {
     });
   });
 });
-
-

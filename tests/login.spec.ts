@@ -1,8 +1,8 @@
 import { test, expect} from '@playwright/test'; 
 import { AccountPage } from '../pages/account.page';
 
-  test.use({ storageState: './playwright/.auth/user.json' });
-  
+  test.use({ storageState: './.auth/user.json' });
+
   test('Login test with valid credentials', async ({ page }) => {
     const accountPage = new AccountPage(page);
     await page.goto('/account');

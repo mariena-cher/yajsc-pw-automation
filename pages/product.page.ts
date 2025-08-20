@@ -1,5 +1,6 @@
 import { Page, expect } from "@playwright/test";
 import { Locator } from "@playwright/test";
+import { HeaderComponent } from "./component/header.component";
 
 export class ProductPage {
     page: Page;
@@ -7,6 +8,8 @@ export class ProductPage {
     unitPrice: Locator;
     addToCart: Locator;
     addToFavorites: Locator;
+    alert: Locator;
+    header: HeaderComponent;
     
 
   constructor(page: Page) {
@@ -15,6 +18,8 @@ export class ProductPage {
     this.unitPrice = page.getByTestId('unit-price');
     this.addToCart = page.getByTestId('add-to-cart');
     this.addToFavorites = page.getByTestId('add-to-favorites');
+    this.alert = page.getByRole('alert', { name: 'Product added to shopping' });
+    this.header = new HeaderComponent(this.page);
   }
 
   async expectLoaded(): Promise<void> {

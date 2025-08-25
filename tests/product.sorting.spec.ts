@@ -1,5 +1,5 @@
-import { test, expect } from '@playwright/test';
-import { HomePage } from '../pages/home.page'; 
+import { expect } from '@playwright/test';
+import { test } from '../fixtures';
 import { SortLabel, SortOrder } from './enums/order.label.sorting';
 import { PowerTools } from './enums/product.categories';
 
@@ -10,13 +10,12 @@ test.describe('Product sorting by name', () => {
   ];
 
   sortOptions.forEach(({ label, order }) => {
-    test(`Verify user can perform sorting by name (asc & desc): ${label}`, async ({ page }) => {
-      const homePage = new HomePage(page);
-      await homePage.goto();
+    test(`Verify user can perform sorting by name (asc & desc): ${label}`, async ({ app }) => {
+      await app.homePage.goto();
 
-      await homePage.sort.selectOption({ label });
+      await app.homePage.sort.selectOption({ label });
 
-      const productNames = await homePage.productNames.allTextContents();
+      const productNames = await app.homePage.productNames.allTextContents();
 
       const sortedNames = [...productNames].sort((a, b) =>
         order === SortOrder.Ascending ? a.localeCompare(b) : b.localeCompare(a)
@@ -33,13 +32,12 @@ test.describe('Product sorting by name', () => {
     ];
 
     priceSortOptions.forEach(({ label, order }) => {
-      test(`Verify user can perform sorting by price: ${label}`, async ({ page }) => {
-        const homePage = new HomePage(page);
-        await homePage.goto();
+      test(`Verify user can perform sorting by price: ${label}`, async ({ app }) => {
+        await app.homePage.goto();
 
-        await homePage.sort.selectOption({ label });
+        await app.homePage.sort.selectOption({ label });
 
-        const productPrices = await homePage.getAllProductPrices();
+        const productPrices = await app.homePage.getAllProductPrices();
         const sortedPrices = [...productPrices].sort((a, b) =>
           order === SortOrder.Ascending ? a - b : b - a
         );
@@ -49,13 +47,12 @@ test.describe('Product sorting by name', () => {
     });
   });
 
-  test('Verify user can filter products by category', async ({ page }) => {
-    const homePage = new HomePage(page);
-    await homePage.goto();
+  test('Verify user can filter products by category', async ({ app }) => {
+    await app.homePage.goto();
 
-    await homePage.selectCategoryCheckbox(PowerTools.Sander);
+    await app.homePage.selectCategoryCheckbox(PowerTools.Sander);
 
-    const productNames = await homePage.getAllProductNames();
+    const productNames = await app.homePage.getAllProductNames();
 
     productNames.forEach(name => {
       expect(name).toContain('Sander');

@@ -1,15 +1,15 @@
 import { Page, Locator } from '@playwright/test';
 
 export class HeaderComponent {
-    page: Page;
-    logo: Locator;
-    navHome: Locator;
-    navCategories: Locator;
-    navContact: Locator;
-    navSignIn: Locator;
-    navCart: Locator;
-    languageSelect: Locator;
-    navMenu: Locator;
+  readonly page: Page;
+  readonly logo: Locator;
+  readonly navHome: Locator;
+  readonly navCategories: Locator;
+  readonly navContact: Locator;
+  readonly navSignIn: Locator;
+  readonly navCart: Locator;
+  readonly languageSelect: Locator;
+  readonly navMenu: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -22,5 +22,4 @@ export class HeaderComponent {
     this.languageSelect = page.getByTestId('language-select');
     this.navMenu = page.getByTestId('nav-menu');
   }
-
 }

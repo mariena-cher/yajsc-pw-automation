@@ -3,14 +3,13 @@ import { Locator } from "@playwright/test";
 import { HeaderComponent } from "./component/header.component";
 
 export class ProductPage {
-    page: Page;
-    productName: Locator;
-    unitPrice: Locator;
-    addToCart: Locator;
-    addToFavorites: Locator;
-    alert: Locator;
-    header: HeaderComponent;
-    
+  readonly page: Page;
+  readonly productName: Locator;
+  readonly unitPrice: Locator;
+  readonly addToCart: Locator;
+  readonly addToFavorites: Locator;
+  readonly alert: Locator;
+  readonly header: HeaderComponent;
 
   constructor(page: Page) {
     this.page = page;
@@ -24,6 +23,5 @@ export class ProductPage {
 
   async expectLoaded(): Promise<void> {
     await expect(this.page).toHaveURL(/\/product/);
-    
   }
 }

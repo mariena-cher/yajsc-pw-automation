@@ -3,9 +3,9 @@ import { Locator } from "@playwright/test";
 import { HeaderComponent } from "./component/header.component";
 
 export class AccountPage {
-    page: Page;
-    pageTitle: Locator;
-    header: HeaderComponent;
+  readonly page: Page;
+  readonly pageTitle: Locator;
+  readonly header: HeaderComponent;
 
   constructor(page: Page) {
     this.page = page;

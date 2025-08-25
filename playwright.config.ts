@@ -38,7 +38,8 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
-    { name: 'auth', testMatch: /.*\.auth\.setup\.spec\.ts$/ },
+    { name: 'auth', 
+      testMatch: /.*\.auth\.setup\.spec\.ts$/ },
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },

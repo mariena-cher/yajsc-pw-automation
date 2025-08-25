@@ -2,12 +2,11 @@ import { Page } from '@playwright/test';
 import { Locator } from '@playwright/test';
 
 export class HomePage {
-  page: Page;
-  sort: Locator;
-  productNames: Locator;
-  category: Locator;
-  productPrice: Locator;
-
+  readonly page: Page;
+  readonly sort: Locator;
+  readonly productNames: Locator;
+  readonly category: Locator;
+  readonly productPrice: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -20,21 +19,21 @@ export class HomePage {
   async goto(): Promise<void> {
     await this.page.goto('/');
   }
-  
-   async clickProductByName(productName: string): Promise<void> {
+
+  async clickProductByName(productName: string): Promise<void> {
     await this.page.getByRole('link', { name: productName }).click();
   }
 
   async getAllProductPrices(): Promise<number[]> {
-  const priceTexts = await this.page.locator('.product-price').allTextContents();
-  return priceTexts.map(text => parseFloat(text.replace(/[^0-9.]/g, '')) || 0);
-}
+    const priceTexts = await this.page.locator('.product-price').allTextContents();
+    return priceTexts.map(text => parseFloat(text.replace(/[^0-9.]/g, '')) || 0);
+  }
 
   selectCategoryCheckbox(categoryName: string): Promise<void> {
     return this.page.getByLabel(categoryName).check();
-}
+  }
 
   async getAllProductNames(): Promise<string[]> {
-    return this.productNames.allTextContents()
+    return this.productNames.allTextContents();
   }
 }

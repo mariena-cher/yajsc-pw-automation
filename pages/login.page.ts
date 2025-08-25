@@ -1,6 +1,5 @@
 import { Page } from "@playwright/test";
-import { validUser } from "../tests/auth.data/credentials";
-
+import { validUser } from "../tests/credentials/login";
 export class LoginPage {
   readonly page: Page;
 

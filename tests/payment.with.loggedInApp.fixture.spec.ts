@@ -18,12 +18,7 @@ test('Verify successful payment using loggedInApp fixture', async ({ loggedInApp
   await loggedInApp.cartPage.proceed3.click();
 
   await loggedInApp.paymentPage.selectPaymentMethod('credit-card');
-  await loggedInApp.paymentPage.fillCreditCardDetails({
-    number: '1111-1111-1111-1111',
-    expiration: '10/2025',
-    cvv: '111',
-    holder: 'Maryna Cher'
-  });
+  await loggedInApp.paymentPage.fillCreditCardDetails();
   await loggedInApp.paymentPage.finish.click();
 
   await expect(loggedInApp.paymentPage.successMessage).toContainText('Payment was successful');

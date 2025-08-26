@@ -26,7 +26,7 @@ export class CartPage {
         this.linePrice = page.getByTestId('line-price');
         this.state = page.getByTestId('state');
         this.postalCode = page.getByTestId('postal_code');
-        this.alreadyLoggedInMessage = page.locator('text=Hello Jane Doe, you are already logged in. You can proceed to checkout.');
+        this.alreadyLoggedInMessage = page.locator('aw-wizard-step app-login p');
     }
 
     async expectLoaded(): Promise<void> {

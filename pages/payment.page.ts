@@ -1,5 +1,5 @@
 import { Page, Locator, expect } from '@playwright/test';
-import { CreditCardDetails } from '../tests/credentials/credit.card.details';
+import { CreditCardDetails } from '../tests/test-data/credit.card.details';
 
 export class PaymentPage {
   readonly page: Page;
@@ -26,11 +26,11 @@ export class PaymentPage {
     await this.paymentMethod.selectOption(method);
   }
 
-  async fillCreditCardDetails() {
-    await this.creditCardNumber.fill(CreditCardDetails.creditCardNumber);
-    await this.expirationDate.fill(CreditCardDetails.expirationDate);
-    await this.cvv.fill(CreditCardDetails.cvv);
-    await this.cardHolderName.fill(CreditCardDetails.cardHolderName);
+  async fillCreditCardDetails(details: CreditCardDetails) {
+    await this.creditCardNumber.fill(details.creditCardNumber);
+    await this.expirationDate.fill(details.expirationDate);
+    await this.cvv.fill(details.cvv);
+    await this.cardHolderName.fill(details.cardHolderName);
   }
 
   async expectSuccessMessage(text: string) {

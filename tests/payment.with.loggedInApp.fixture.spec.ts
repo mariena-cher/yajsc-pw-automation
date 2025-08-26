@@ -1,5 +1,6 @@
 import { expect } from '@playwright/test';
 import { loggedInTest as test } from '../fixtures';
+import { CreditCardData } from '../tests/test-data/credit.card.details';
 
 test('Verify successful payment using loggedInApp fixture', async ({ loggedInApp }) => {
   await loggedInApp.homePage.goto();
@@ -18,7 +19,7 @@ test('Verify successful payment using loggedInApp fixture', async ({ loggedInApp
   await loggedInApp.cartPage.proceed3.click();
 
   await loggedInApp.paymentPage.selectPaymentMethod('credit-card');
-  await loggedInApp.paymentPage.fillCreditCardDetails();
+  await loggedInApp.paymentPage.fillCreditCardDetails(CreditCardData);
   await loggedInApp.paymentPage.finish.click();
 
   await expect(loggedInApp.paymentPage.successMessage).toContainText('Payment was successful');

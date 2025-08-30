@@ -1,5 +1,6 @@
 import { expect } from '@playwright/test';
 import { test } from '../fixtures';
+import { mockProductsResponse } from '../utils/mocking';
 
 test('Verify user can view product details', async ({ app }) => {
   await app.homePage.goto();
@@ -32,4 +33,11 @@ test('Verify user can add product to cart', async ({ app }) => {
   await expect(app.cartPage.page.getByTestId('product-quantity')).toHaveCount(1);
   await expect(app.cartPage.productTitle).toHaveText('Slip Joint Pliers');
   await expect(app.cartPage.proceed1).toBeVisible();
+});
+
+test('Verify products quantity by mocking', async ({ page, app }) => {
+  await page.route('**/products?**', mockProductsResponse);
+
+  await app.homePage.goto();
+  await expect(app.homePage.card).toHaveCount(20);
 });

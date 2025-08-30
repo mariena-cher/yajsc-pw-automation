@@ -7,6 +7,7 @@ export class HomePage {
   readonly productNames: Locator;
   readonly category: Locator;
   readonly productPrice: Locator;
+  readonly card: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -14,6 +15,7 @@ export class HomePage {
     this.productNames = page.locator('[data-testid^="product-"] [data-testid="product-name"]');
     this.productPrice = page.getByTestId('product-price');
     this.category = page.locator('[data-testid^="category-"]');
+    this.card = page.locator('a[href^="/product/"]');
   }
 
   async goto(): Promise<void> {

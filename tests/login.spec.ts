@@ -1,9 +1,9 @@
 import { expect } from '@playwright/test';
-import { loggedInTest as test } from '../fixtures';
+import { loggedInTestApi as test } from '../fixtures';
 
-test('Login test with valid credentials', async ({ loggedInApp }) => {
-  await loggedInApp.accountPage.page.goto('/account');
-  await loggedInApp.accountPage.expectLoaded();
-  await expect(loggedInApp.accountPage.pageTitle).toBeVisible();
-  await expect(loggedInApp.accountPage.header.navMenu).toBeVisible();
+test('Login test with valid credentials', async ({ loggedInViaApi }) => {
+  await loggedInViaApi.accountPage.page.goto('/account');
+  await loggedInViaApi.accountPage.expectLoaded();
+  await expect(loggedInViaApi.accountPage.pageTitle).toBeVisible();
+  await expect(loggedInViaApi.accountPage.header.navMenu).toBeVisible();
 });

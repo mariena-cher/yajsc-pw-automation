@@ -3,7 +3,10 @@ import { LoginPage } from '../pages/login.page';
 import path from 'path';
 
 const authFile = path.join(process.cwd(), '.auth/user.json');
-test('Setup authentication and save state', async ({ page }) => {
+
+test('Setup authentication and save state', {
+  tag: '@smoke',
+}, async ({ page }) => {
   const loginPage = new LoginPage(page);
   await loginPage.gotoLogin();
   await loginPage.performLogin();
@@ -11,5 +14,4 @@ test('Setup authentication and save state', async ({ page }) => {
   await expect(page).toHaveURL(/\/account/);
 
   await page.context().storageState({ path: authFile });
-  
-  });
+});

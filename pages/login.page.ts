@@ -1,5 +1,4 @@
 import { Page } from "@playwright/test";
-import { validUser } from "../tests/test-data/login";
 export class LoginPage {
   readonly page: Page;
 
@@ -12,8 +11,10 @@ export class LoginPage {
   }
 
   async performLogin(): Promise<void> {
-    await this.page.getByTestId('email').fill(validUser.email);
-    await this.page.getByTestId('password').fill(validUser.password);
+    const email = process.env.EMAIL!;
+    const password = process.env.PASSWORD!;
+    await this.page.getByTestId('email').fill(email);
+    await this.page.getByTestId('password').fill(password);
     await this.page.getByTestId('login-submit').click();
   }
 }

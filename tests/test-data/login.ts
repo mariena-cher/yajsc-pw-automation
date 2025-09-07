@@ -1,5 +1,8 @@
-// export const validUser = {
-//   email: 'customer@practicesoftwaretesting.com',
-//   password: 'welcome01',
-// };
+import { EMAIL, PASSWORD, NAME } from "../../config/baseConfig";
+
+export const validUser = {
+  email: EMAIL,
+  password: PASSWORD,
+  name: NAME,
+};
 

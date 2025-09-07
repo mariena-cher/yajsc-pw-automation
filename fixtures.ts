@@ -1,6 +1,5 @@
 import { test as base } from '@playwright/test';
 import { AllPages } from "./pages/allPages";
-import { validUser } from './tests/test-data/login';
 
 type App = {
     app: AllPages;
@@ -39,8 +38,8 @@ export const loggedInTestApi = base.extend<LoggedInViaApi>({
   loggedInViaApi: async ({ page, request }, use) => {
     const resp = await request.post(`${process.env.API_URL}/users/login`, {
       data: {
-        email: validUser.email,
-        password: validUser.password,
+        email: process.env.EMAIL,
+        password: process.env.PASSWORD,
       }
     });
     const jsonData = await resp.json() as LoginResponse;

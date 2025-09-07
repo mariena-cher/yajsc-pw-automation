@@ -33,7 +33,7 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on',
 
-    headless: false,
+    headless: true,
 
     testIdAttribute: 'data-test',
   },
@@ -44,6 +44,18 @@ export default defineConfig({
       testMatch: /.*\.auth\.setup\.spec\.ts$/ },
     {
       name: 'chromium',
+      use: { ...devices['Desktop Chrome'] },
+      dependencies: ['auth']
+    },
+    {
+      name: 'smoke',
+      grep: /@smoke/,
+      use: { ...devices['Desktop Chrome'] },
+      dependencies: ['auth']
+    },
+    {
+      name: 'regression',
+      grep: /@regression/,
       use: { ...devices['Desktop Chrome'] },
       dependencies: ['auth']
     },

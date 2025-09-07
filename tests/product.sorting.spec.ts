@@ -3,7 +3,9 @@ import { test } from '../fixtures';
 import { SortLabel, SortOrder } from './enums/order.label.sorting';
 import { PowerTools } from './enums/product.categories';
 
-test.describe('Product sorting by name', () => {
+test.describe('Product sorting by name', {
+  tag: '@regression',
+}, () => {
   const sortOptions = [
     { label: SortLabel.AscendingByName, order: SortOrder.Ascending },
     { label: SortLabel.DescendingByName, order: SortOrder.Descending }
@@ -25,7 +27,9 @@ test.describe('Product sorting by name', () => {
     });
   });
 
-  test.describe('Product sorting by price', () => {
+  test.describe('Product sorting by price', {
+    tag: '@regression',
+  }, () => {
     const priceSortOptions = [
       { label: SortLabel.AscendingByPrice, order: SortOrder.Ascending },
       { label: SortLabel.DescendingByPrice, order: SortOrder.Descending }
@@ -47,7 +51,9 @@ test.describe('Product sorting by name', () => {
     });
   });
 
-  test('Verify user can filter products by category', async ({ app }) => {
+  test('Verify user can filter products by category', {
+    tag: '@regression',
+  }, async ({ app }) => {
     await app.homePage.goto();
 
     await app.homePage.selectCategoryCheckbox(PowerTools.Sander);

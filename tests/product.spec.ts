@@ -2,7 +2,9 @@ import { expect } from '@playwright/test';
 import { test } from '../fixtures';
 import { mockProductsResponse } from '../utils/mocking';
 
-test('Verify user can view product details', async ({ app }) => {
+test('Verify user can view product details', {
+  tag: '@regression',
+}, async ({ app }) => {
   await app.homePage.goto();
   await app.homePage.clickProductByName('Combination Pliers');
 
@@ -13,7 +15,9 @@ test('Verify user can view product details', async ({ app }) => {
   await expect(app.productPage.addToFavorites).toBeVisible();
 });
 
-test('Verify user can add product to cart', async ({ app }) => {
+test('Verify user can add product to cart', {
+  tag: '@regression',
+}, async ({ app }) => {
   await app.homePage.goto();
   await app.homePage.clickProductByName('Slip Joint Pliers');
 
@@ -35,7 +39,9 @@ test('Verify user can add product to cart', async ({ app }) => {
   await expect(app.cartPage.proceed1).toBeVisible();
 });
 
-test('Verify products quantity by mocking', async ({ page, app }) => {
+test('Verify products quantity by mocking', {
+  tag: '@regression',
+}, async ({ page, app }) => {
   await page.route('**/products?**', mockProductsResponse);
 
   await app.homePage.goto();

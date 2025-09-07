@@ -51,11 +51,13 @@ export default defineConfig({
       name: 'smoke',
       grep: /@smoke/,
       use: { ...devices['Desktop Chrome'] },
+      dependencies: ['auth']
     },
     {
       name: 'regression',
       grep: /@regression/,
       use: { ...devices['Desktop Chrome'] },
+      dependencies: ['auth']
     },
 
     // {

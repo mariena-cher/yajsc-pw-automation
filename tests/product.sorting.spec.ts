@@ -13,17 +13,21 @@ test.describe('Product sorting by name', {
 
   sortOptions.forEach(({ label, order }) => {
     test(`Verify user can perform sorting by name (asc & desc): ${label}`, async ({ app }) => {
-      await app.homePage.goto();
+      await test.step('Go to home page', async () => {
+        await app.homePage.goto();
+      });
 
-      await app.homePage.sort.selectOption({ label });
+      await test.step(`Select sort option: ${label}`, async () => {
+        await app.homePage.sort.selectOption({ label });
+      });
 
-      const productNames = await app.homePage.productNames.allTextContents();
-
-      const sortedNames = [...productNames].sort((a, b) =>
-        order === SortOrder.Ascending ? a.localeCompare(b) : b.localeCompare(a)
-      );
-
-      expect(productNames).toEqual(sortedNames);
+      await test.step('Get and check sorted product names', async () => {
+        const productNames = await app.homePage.productNames.allTextContents();
+        const sortedNames = [...productNames].sort((a, b) =>
+          order === SortOrder.Ascending ? a.localeCompare(b) : b.localeCompare(a)
+        );
+        expect(productNames).toEqual(sortedNames);
+      });
     });
   });
 
@@ -37,16 +41,21 @@ test.describe('Product sorting by name', {
 
     priceSortOptions.forEach(({ label, order }) => {
       test(`Verify user can perform sorting by price: ${label}`, async ({ app }) => {
-        await app.homePage.goto();
+        await test.step('Go to home page', async () => {
+          await app.homePage.goto();
+        });
 
-        await app.homePage.sort.selectOption({ label });
+        await test.step(`Select sort option: ${label}`, async () => {
+          await app.homePage.sort.selectOption({ label });
+        });
 
-        const productPrices = await app.homePage.getAllProductPrices();
-        const sortedPrices = [...productPrices].sort((a, b) =>
-          order === SortOrder.Ascending ? a - b : b - a
-        );
-
-        expect(productPrices).toEqual(sortedPrices);
+        await test.step('Get and check sorted product prices', async () => {
+          const productPrices = await app.homePage.getAllProductPrices();
+          const sortedPrices = [...productPrices].sort((a, b) =>
+            order === SortOrder.Ascending ? a - b : b - a
+          );
+          expect(productPrices).toEqual(sortedPrices);
+        });
       });
     });
   });
@@ -54,14 +63,19 @@ test.describe('Product sorting by name', {
   test('Verify user can filter products by category', {
     tag: '@regression',
   }, async ({ app }) => {
-    await app.homePage.goto();
+    await test.step('Go to home page', async () => {
+      await app.homePage.goto();
+    });
 
-    await app.homePage.selectCategoryCheckbox(PowerTools.Sander);
+    await test.step('Select category checkbox', async () => {
+      await app.homePage.selectCategoryCheckbox(PowerTools.Sander);
+    });
 
-    const productNames = await app.homePage.getAllProductNames();
-
-    productNames.forEach(name => {
-      expect(name).toContain('Sander');
+    await test.step('Get and check filtered product names', async () => {
+      const productNames = await app.homePage.getAllProductNames();
+      productNames.forEach(name => {
+        expect(name).toContain('Sander');
+      });
     });
   });
 });

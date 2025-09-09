@@ -8,10 +8,20 @@ test('Setup authentication and save state', {
   tag: '@smoke',
 }, async ({ page }) => {
   const loginPage = new LoginPage(page);
-  await loginPage.gotoLogin();
-  await loginPage.performLogin();
 
-  await expect(page).toHaveURL(/\/account/);
+  await test.step('Go to login page', async () => {
+    await loginPage.gotoLogin();
+  });
 
-  await page.context().storageState({ path: authFile });
+  await test.step('Perform login', async () => {
+    await loginPage.performLogin();
+  });
+
+  await test.step('Verify redirect to account page', async () => {
+    await expect(page).toHaveURL(/\/account/);
+  });
+
+  await test.step('Save storage state', async () => {
+    await page.context().storageState({ path: authFile });
+  });
 });
